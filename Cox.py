@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Aug 15 09:28:59 2021
+Created on Fri Feb 5 09:28:59 2021
 
 @author: zhuoy
 """
 
 from lifelines import CoxPHFitter
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,8 +22,8 @@ categorical_variables = [
     'gender','blood_group','second_cancer', 'MLH1', 'MSH2', 'MSH6', 'PMS2', 
     'MMR1','MMR2', 'MSI', 'RAS', 'BRAF','cancer_type','differentiation', 
     'pathological_type','PNI', 'VI','T_stage', 'N_stage', 'M_stage', 'AJCC_stage',
-    'liver_m', 'lung_m', 'peritoneum_m', 'abdomen_m', 'pelvic_m', 'bone_m' ,
-    'brain_m', 'other_m'
+    #'liver_m', 'lung_m', 'peritoneum_m', 'abdomen_m', 'pelvic_m', 'bone_m' ,
+    #'brain_m', 'other_m'
     ]
 
 numerical_variables = [
@@ -32,8 +31,10 @@ numerical_variables = [
     #'serum albumin level (g/L)', 'total lymphocyte count (/L)', 
     #'total neutrophil count(/L)','total monocyte count(/L)',
     #'total platelet count(/L)',
-    #'height', 'weight',
-    'BMI', 'BSA','tumour_size','num_of_lymph_nodes', 'num_of_positive_lymph_nodes',
+    'height', 'weight',
+    #'BMI', 'BSA',
+    'tumour_size',
+    #'num_of_lymph_nodes', 'num_of_positive_lymph_nodes',
     'LMR', 'NLR', 'PLR', 'PNI_'
     ]
 
@@ -63,15 +64,7 @@ def Cox_Regression(data):
     
 
 Cox_Regression(create_subset(data,'survival1','three_year_survival1'))
-
-
-
-
-
-
-
-
-
+Cox_Regression(create_subset(data,'survival1','five_year_survival1'))
 
 
 
