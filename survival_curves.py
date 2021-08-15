@@ -2,7 +2,7 @@
 """
 Created on Sat Feb 6 21:00:17 2021
 
-@author: zhuoy
+@author: Zhuoyan Shen
 """
 
 import numpy as np
@@ -50,8 +50,14 @@ def plot_KM(data,label,duration,event):
     model.fit(X2, y2, label='{} >= THRESHOLD'.format(label))
     model.plot(ax=ax,show_censors=True, censor_styles={'ms': 6, 'marker': 's'})
     
-    rank_test = logrank_test(X1, X2, y1, y2,weightings='wilcoxon')
-    rank_test.print_summary()
+    test = logrank_test(X1, X2, y1, y2,weightings='wilcoxon')
+    test.print_summary()
+    test = logrank_test(X1, X2, y1, y2,weightings='tarone-ware')
+    test.print_summary()
+    test = logrank_test(X1, X2, y1, y2,weightings='peto')
+    test.print_summary()
+    test = logrank_test(X1, X2, y1, y2,weightings='fleming-harrington',p=0,q=0)
+    test.print_summary()
     
     median_confidence_interval = median_survival_times(model.confidence_interval_)
     print('Suvival months with 95% confidence intervial: {}'.format(median_confidence_interval))
@@ -61,14 +67,15 @@ def plot_KM(data,label,duration,event):
 plot_KM(data=df,label='PNI_stat',duration='survival1',event='three_year_survival1')
 plt.title('KM curves in terms of high or low PNI (Start: Date of Diagnosis)')
 plt.show()
-plot_KM(data=df,label='PNI_stat',duration='survival2',event='three_year_survival2')
-plt.title('KM curves in terms of high or low PNI (Start: Date of Test)')
-plt.show()
+#plot_KM(data=df,label='PNI_stat',duration='survival2',event='three_year_survival2')
+#plt.title('KM curves in terms of high or low PNI (Start: Date of Test)')
+#plt.show()
+#%%
 plot_KM(data=df,label='PNI_stat',duration='survival1',event='five_year_survival1')
 plt.title('KM curves in terms of high or low PNI (Start: Date of Diagnosis)')
 plt.show()
-plot_KM(data=df,label='PNI_stat',duration='survival2',event='five_year_survival2')
-plt.title('KM curves in terms of high or low PNI (Start: Date of Test)')
-plt.show()
+#plot_KM(data=df,label='PNI_stat',duration='survival2',event='five_year_survival2')
+#plt.title('KM curves in terms of high or low PNI (Start: Date of Test)')
+#plt.show()
     
     
